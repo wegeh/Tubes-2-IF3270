@@ -1,12 +1,12 @@
 # Tugas Besar 2 IF3270 Pembelajaran Mesin - Convolutional Neural Network dan Recurrent Neural Network
 
 ## Deskripsi
-Repository ini berisi implementasi model Convolutional Neural Network (CNN) dan Recurrent Neural Network (RNN) untuk Tugas Besar 2 IF3270 Pembelajaran Mesinp. Fokus tugas ini adalah mengimplementasikan fungsi forward propagation secara from scratch untuk model CNN, RNN, dan Long-Short Term Memory (LSTM). Selain itu, terdapat juga pengujian-pengujian pada masing-masing model dari segi jumlah layer, ukuran layer, bidirectional atau unidirectional, dan lain-lain. Selain kode sumber Python, repository ini juga menyediakan file Jupyter Notebook (.ipynb) untuk eksplorasi interaktif
+Repository ini berisi implementasi model Convolutional Neural Network (CNN) dan Recurrent Neural Network (RNN) untuk Tugas Besar 2 IF3270 Pembelajaran Mesinp. Fokus tugas ini adalah mengimplementasikan fungsi forward propagation secara from scratch untuk model CNN, RNN, dan Long-Short Term Memory (LSTM). Selain itu, terdapat juga pengujian-pengujian pada masing-masing model dari segi jumlah layer, ukuran layer, bidirectional atau unidirectional, dan lain-lain. Repository ini  menyediakan file Python dan Jupyter Notebook (.ipynb) untuk eksplorasi interaktif
 
 ## Cara Setup dan Menjalankan Program
 1. **Clone Repository:**
    ```bash
-   git clone https://github.com/wegeh/Tubes-3-IF3270.git
+   git clone https://github.com/wegeh/Tubes-2-IF3270.git
    cd Tubes-2-IF3270
    ```
 
@@ -31,12 +31,12 @@ Repository ini berisi implementasi model Convolutional Neural Network (CNN) dan 
 
 5. **Menjalankan Program: Untuk menjalankan program, jalankan file Python yang diinginkan:**
    ```bash
-    python 1<nama_file_python.py>
+    python <nama_file_python.py>
    ```
     Anda juga dapat membuka dan menjalankan file Jupyter Notebook (.ipynb) yang tersedia untuk eksplorasi lebih lanjut.
 
 ## Struktur Repository
-- **folder src**: Berisi kode sumber Python untuk implementasi FFNN dan eksperimen.
+- **folder src**: Berisi kode sumber Python dan Jupyter Notebook.
 - **folder doc**: Berisi dokumen laporan lengkap.
 - **requirements.txt**: Daftar dependencies yang diperlukan.
 - **README.md**: Penjelasan mengenai tugas dan dokumentasi.
