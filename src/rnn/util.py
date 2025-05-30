@@ -1,6 +1,6 @@
 import tensorflow as tf
 
-from rnn.keras_model import build_simple_rnn_model
+from keras_model import build_simple_rnn_model
 
 SEED = 42
 def prepare_dataset(texts, labels, vectorizer, batch_size=32):
