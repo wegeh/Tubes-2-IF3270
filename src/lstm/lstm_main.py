@@ -49,7 +49,7 @@ def build_keras_lstm(vocab_size, embedding_dim, seq_len,
                      lstm_units, bidirectional, dropout_rate,
                      num_classes):
     inp = layers.Input((seq_len,), dtype='int32')
-    x = layers.Embedding(vocab_size, embedding_dim, mask_zero=True)(inp)
+    x = layers.Embedding(vocab_size, embedding_dim, mask_zero=False)(inp)
     for i, u in enumerate(lstm_units):
         ret_seq = (i < len(lstm_units)-1)
         L = layers.LSTM(u, return_sequences=ret_seq)
@@ -79,10 +79,10 @@ def main():
     SEQ_LEN     = 200
     EMBED_DIM   = 128
     LSTM_UNITS  = [64]       
-    BIDIR       = True
+    BIDIR       = False
     DROPOUT     = 0.5
     BATCH_SIZE  = 64
-    EPOCHS      = 50        
+    EPOCHS      = 10        
 
     (train_texts, train_labels), (val_texts, val_labels), (test_texts, test_labels) = load_dataset(DATA_DIR)
 

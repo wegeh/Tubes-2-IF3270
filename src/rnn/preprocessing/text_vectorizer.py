@@ -9,11 +9,10 @@ STOPWORDS = {
 
 def custom_standardization(input_text):
     lowercase = tf.strings.lower(input_text)
-    # Tambahkan handling untuk karakter khusus Indonesia
     cleaned = tf.strings.regex_replace(lowercase, f"[{re.escape(string.punctuation)}]", " ")
     cleaned = tf.strings.regex_replace(cleaned, r'\d+', '')
     cleaned = tf.strings.regex_replace(cleaned, r'\s+', ' ')
-    cleaned = tf.strings.strip(cleaned)  # Tambahkan strip
+    cleaned = tf.strings.strip(cleaned)  
     return cleaned
 
 

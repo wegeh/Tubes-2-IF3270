@@ -44,14 +44,10 @@ class LSTMLayer:
     
     def forward(self, 
                 input_sequence: np.ndarray, 
-                mask: Optional[np.ndarray] = None,
                 initial_hidden_state: Optional[np.ndarray] = None,
                 initial_cell_state: Optional[np.ndarray] = None,
                 return_sequences: bool = True) -> Tuple[np.ndarray, Tuple[np.ndarray, np.ndarray]]:
         batch_size, sequence_length, _ = input_sequence.shape
-
-        if mask is None:
-            mask = np.ones((batch_size, sequence_length), dtype=bool)
 
         if initial_hidden_state is None:
             hidden_state = np.zeros((batch_size, self.hidden_units))
@@ -68,10 +64,6 @@ class LSTMLayer:
         
         for time_step in range(sequence_length):
             current_input = input_sequence[:, time_step, :]  
-            mask_t = mask[:, time_step]
-
-            h_prev = hidden_state.copy()
-            c_prev = cell_state.copy()
 
             input_gate = sigmoid(
                 current_input @ self.input_weights_input + 
@@ -102,8 +94,8 @@ class LSTMLayer:
             new_c = cell_state
             new_h = output_gate * tanh(new_c)
             
-            hidden_state = np.where(mask_t[:, None], new_h, h_prev)
-            cell_state   = np.where(mask_t[:, None], new_c, c_prev)
+            hidden_state = new_h
+            cell_state   = new_c
 
             if return_sequences:
                 all_hidden_states[:, time_step, :] = hidden_state
@@ -124,20 +116,18 @@ class BidirectionalLSTMLayer:
 
     def forward(self,
                 input_sequence: np.ndarray,
-                mask: Optional[np.ndarray] = None,
                 initial_hidden_state=None,
                 initial_cell_state=None,
                 return_sequences: bool = False
                ):
         out_fw, (h_fw, c_fw) = self.fw.forward(
-            input_sequence, mask,
+            input_sequence,
             initial_hidden_state, initial_cell_state,
             return_sequences=return_sequences
         )
         rev_x   = input_sequence[:, ::-1, :]
-        rev_mask= mask[:, ::-1] if mask is not None else None
         out_bw, (h_bw, c_bw) = self.bw.forward(
-            rev_x, rev_mask,
+            rev_x, 
             initial_hidden_state, initial_cell_state,
             return_sequences=return_sequences
         )
@@ -146,21 +136,16 @@ class BidirectionalLSTMLayer:
             out_bw = out_bw[:, ::-1, :]
             return np.concatenate([out_fw, out_bw], axis=-1), (None, None)
         else:
-            h = np.concatenate([h_fw, h_bw], axis=-1)
-            return h, (h, None)
+            h_combined = np.concatenate([h_fw, h_bw], axis=-1)
+            c_combined = np.concatenate([c_fw, c_bw], axis=-1) if c_fw is not None and c_bw is not None else None
+            return h_combined, (h_combined, c_combined)
 
 class DropoutLayer:
     def __init__(self, dropout_rate: float):
         self.dropout_rate = dropout_rate
     
     def forward(self, inputs: np.ndarray, training: bool = False) -> np.ndarray:
-        if not training or self.dropout_rate == 0.0:
-            return inputs
-
-        keep_probability = 1.0 - self.dropout_rate
-        dropout_mask = (np.random.rand(*inputs.shape) < keep_probability)
-  
-        return inputs * dropout_mask / keep_probability
+        return inputs 
 
 class DenseLayer:
     def __init__(self, 
@@ -196,7 +181,6 @@ class LSTMModel:
         self._last_lstm_idx = max(rec_idxs)
 
     def forward(self, token_indices: np.ndarray, training: bool = False) -> np.ndarray:
-        mask = (token_indices != 0)
         current = token_indices
         rec_types = (LSTMLayer, BidirectionalLSTMLayer)
 
@@ -204,7 +188,6 @@ class LSTMModel:
             if isinstance(layer, rec_types):
                 return_seq = (idx != self._last_lstm_idx)
                 current, _ = layer.forward(current,
-                                          mask=mask,
                                           return_sequences=return_seq)
             elif isinstance(layer, DropoutLayer):
                 current = layer.forward(current, training=training)
@@ -295,7 +278,6 @@ def load_lstm_weights_from_keras(
         weights['dense'] = (W, b)
 
     return weights
-
 
 def create_lstm_model_from_weights(
     weights_dict: Dict[str, Any],

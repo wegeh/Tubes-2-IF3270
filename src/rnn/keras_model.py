@@ -6,7 +6,7 @@ def build_simple_rnn_model(vocab_size, embedding_dim=128, rnn_units=64, num_clas
     x = tf.keras.layers.Embedding(input_dim=vocab_size, output_dim=embedding_dim, name = "embedding")(inputs)
 
     for i in range(num_layers):
-        return_sequences = (i < num_layers - 1)  # True kalau bukan layer terakhir
+        return_sequences = (i < num_layers - 1)  
         rnn = tf.keras.layers.SimpleRNN(rnn_units, return_sequences=return_sequences, name=f"rnn_layer_{i+1}")
         if bidirectional:
             x = tf.keras.layers.Bidirectional(rnn, name=f"bidirectional_{i+1}")(x)

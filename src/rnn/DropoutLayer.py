@@ -9,7 +9,6 @@ class DropoutLayer:
         if not training or self.rate == 0.0:
             return X
         
-        # Inverted dropout
         keep_prob = 1.0 - self.rate
         mask = np.random.binomial(1, keep_prob, size=X.shape)
         return X * mask / keep_prob

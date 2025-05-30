@@ -36,7 +36,6 @@ def train_rnn_model(
         num_layers=num_layers
     )
     
-    # Menampilkan ringkasan arsitektur model
     model.summary(line_length=100)
 
     model.compile(
@@ -45,7 +44,6 @@ def train_rnn_model(
         metrics=["accuracy"]
     )
 
-    # 3. Mendefinisikan callback untuk Early Stopping
     callback = tf.keras.callbacks.EarlyStopping(
         monitor='val_loss',
         patience=patience,
@@ -53,7 +51,6 @@ def train_rnn_model(
         verbose=1
     )
 
-    # 4. Melatih model
     print(f"\nMemulai training model untuk {epochs} epoch (dengan Early Stopping patience={patience})...")
     history = model.fit(
         train_ds,

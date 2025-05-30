@@ -1,4 +1,3 @@
-# --- Activation Functions ---
 import numpy as np
 
 
