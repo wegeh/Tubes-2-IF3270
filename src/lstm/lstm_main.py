@@ -73,13 +73,13 @@ def eval_macro_f1_keras(model, ds):
     return f1_score(y_true, y_pred, average='macro')
 
 def main():
-    DATA_DIR    = '../dataset/lstm'
+    DATA_DIR    = 'dataset'
     MODEL_DIR   = 'models'
     MAX_TOKENS  = 20000
     SEQ_LEN     = 200
     EMBED_DIM   = 128
     LSTM_UNITS  = [64]       
-    BIDIR       = False
+    BIDIR       = True
     DROPOUT     = 0.5
     BATCH_SIZE  = 64
     EPOCHS      = 10        
