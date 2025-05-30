@@ -1,10 +1,7 @@
 # Tugas Besar 2 IF3270 Pembelajaran Mesin - Convolutional Neural Network dan Recurrent Neural Network
 
 ## Deskripsi
-Repository ini berisi implementasi model Feedforward Neural Network (FFNN) untuk Tugas Besar 1 IF3270 Pembelajaran Mesin. Proyek ini mencakup eksperimen dan analisis berbagai teknik, seperti regularisasi (L1 dan L2) serta RMS Norm, untuk meningkatkan performa model. Selain kode sumber Python, repository ini juga menyediakan file Jupyter Notebook (.ipynb) untuk eksplorasi interaktif serta folder `doc` yang berisi laporan lengkap.
-
-Repository ini berisi implementasi model Convolutional Neural Network (CNN) dan Recurrent Neural Network (RNN) untuk Tugas Besar 2 IF3270 Pembelajaran Mesinp. Fokus tugas ini adalah mengimplementasikan fungsi forward propagation secara from scratch untuk model CNN, RNN, dan Long-Short Term Memory (LSTM). Selain itu, terdapat juga pengujian-pengujian pada masing-masing model
-dari segi jumlah layer, ukuran layer, bidirectional atau unidirectional, dan lain-lain
+Repository ini berisi implementasi model Convolutional Neural Network (CNN) dan Recurrent Neural Network (RNN) untuk Tugas Besar 2 IF3270 Pembelajaran Mesinp. Fokus tugas ini adalah mengimplementasikan fungsi forward propagation secara from scratch untuk model CNN, RNN, dan Long-Short Term Memory (LSTM). Selain itu, terdapat juga pengujian-pengujian pada masing-masing model dari segi jumlah layer, ukuran layer, bidirectional atau unidirectional, dan lain-lain. Selain kode sumber Python, repository ini juga menyediakan file Jupyter Notebook (.ipynb) untuk eksplorasi interaktif
 
 ## Cara Setup dan Menjalankan Program
 1. **Clone Repository:**
